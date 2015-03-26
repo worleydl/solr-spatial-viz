@@ -12,7 +12,7 @@
 
   <hr style="margin: 10px;">
 
-  <openlayers ol-markers="markers" height="480px" width="100%">
-    <ol-marker ng-repeat="marker in markers" lat="marker.lat" lon="marker.lon"></ol-marker> 
+  <openlayers height="480px" width="100%">
+    <ol-marker ng-repeat="marker in markers" lat="marker.geometry.coordinates[0]" lon="marker.geometry.coordinates[1]"></ol-marker> 
   </openlayers>
 </div>
