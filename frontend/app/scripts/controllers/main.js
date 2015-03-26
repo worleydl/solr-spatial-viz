@@ -21,6 +21,7 @@ angular.module('frontendApp')
         $scope.layers = [];
 
         var layer = {
+          opacity: 0.5,
           type: 'Heatmap',
           source: {
             type: 'GeoJSON',
