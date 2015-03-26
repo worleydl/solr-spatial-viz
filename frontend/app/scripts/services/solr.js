@@ -4,17 +4,21 @@ angular.module('frontendApp')
   .factory('$solr', ['$http', '$log', '$q', function($http, $log, $q) {
     var factory = {};
   
-    var SOLR_URL = "http://localhost:8983/solr/hmdb/select?rows=100&wt=json&q=";
+    var SOLR_URL = "http://localhost:8983/solr/hmdb/select?rows=1000&wt=json&q=";
      
 
     function toGeoJson(data) {
-      var features = [];
+      var geojson = {
+        type: 'FeatureCollection',
+        features: [] 
+      };
 
       angular.forEach(data, function(value, key) {
         var coordData = value.coords.split(',');
         for(var i = 0; i < coordData.length; i++) {
           coordData[i] = parseFloat(coordData[i]);
         }
+        coordData.reverse();
 
         var marker = {
           type: 'Feature',
@@ -28,10 +32,10 @@ angular.module('frontendApp')
           }
         };
 
-        features.push(marker);
+        geojson.features.push(marker);
       });
 
-      return features;
+      return geojson;
     }
 
     factory.search = function(query) {

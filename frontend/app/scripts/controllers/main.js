@@ -12,9 +12,27 @@ angular.module('frontendApp')
     $scope.query = '';
     $scope.markers = [];
 
+    $scope.layers = [];
+    
     $scope.doSearch = function() {
       $solr.search($scope.query).then(function(data) {
-        $scope.markers = data;
+        $scope.markers = data.features;
+
+        $scope.layers = [];
+
+        var layer = {
+          type: 'Heatmap',
+          source: {
+            type: 'GeoJSON',
+            radius: 5,
+            geojson: { 
+              object: data,
+              projection: 'EPSG:3857' 
+            }
+          }
+        }; 
+
+        $scope.layers.push(layer);
       });
     };
   }]);
