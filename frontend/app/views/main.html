@@ -8,6 +8,11 @@
     <div class="col-md-2">
       <button ng-click="doSearch()">Search!</button> 
     </div>
-
   </div>
+
+  <hr style="margin: 10px;">
+
+  <openlayers ol-markers="markers" height="480px" width="100%">
+    <ol-marker ng-repeat="marker in markers" lat="marker.lat" lon="marker.lon"></ol-marker> 
+  </openlayers>
 </div>

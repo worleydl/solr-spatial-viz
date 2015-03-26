@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'openlayers-directive'
   ])
   .config(function ($routeProvider) {
     $routeProvider

@@ -4,7 +4,7 @@ angular.module('frontendApp')
   .factory('$solr', ['$http', '$log', '$q', function($http, $log, $q) {
     var factory = {};
   
-    var SOLR_URL = "http://localhost:8983/solr/hmdb/select?wt=json&q=";
+    var SOLR_URL = "http://localhost:8983/solr/hmdb/select?rows=100&wt=json&q=";
      
     factory.search = function(query) {
       $log.info('Searching for: ' + query);
