@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="text-center">Search for Something in History</h3>
+  <h3 class="text-center">Search for Something in US History</h3>
   <div class="row">
     <div class="col-md-10">
       <input style="width: 100%;" type="text" ng-model="query" >
@@ -12,8 +12,16 @@
 
   <hr style="margin: 10px;">
 
-  <openlayers height="480px" width="100%">
-    <!-- <ol-marker ng-repeat="marker in markers" lat="marker.geometry.coordinates[0]" lon="marker.geometry.coordinates[1]"></ol-marker>  -->
-    <ol-layer ol-layer-properties="layer" ng-repeat="layer in layers"></ol-layer>
+  <openlayers height="480px" width="100%" ol-center="center">
+    <ol-marker ng-if="mapMode === 'Markers'" ng-repeat="marker in markers" ol-marker-properties="marker"></ol-marker>
+    <ol-layer ng-if="mapMode === 'Heatmap'" ol-layer-properties="layer" ng-repeat="layer in layers"></ol-layer>
   </openlayers>
+
+  <div class="text-center">
+  <h4>Select Map Mode</h4>
+    <div class="btn-group">
+      <label class="btn btn-primary" ng-model="mapMode" btn-radio="'Markers'">Markers</label>
+      <label class="btn btn-primary" ng-model="mapMode" btn-radio="'Heatmap'">Heatmap</label>
+    </div>
+  </div>
 </div>

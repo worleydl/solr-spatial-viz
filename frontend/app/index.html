@@ -13,6 +13,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="bower_components/openlayers3/build/ol.css">
+    <link rel="stylesheet" href="bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.css">
     <!-- endbuild -->
   </head>
   <body ng-app="frontendApp">
@@ -24,14 +25,15 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
+          <li><a ng-href="#">Home</a></li>
+          <li><a ng-href="#/about">About</a></li>
         </ul>
         <h3 class="text-muted">HMDB Map</h3>
       </div>
 
       <div ng-view=""></div>
 
-      <div class="footer">
+      <div class="footer" style="margin-top: 15px;">
         <p>Daniel Worley</p>
       </div>
     </div>
@@ -78,6 +80,7 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
 
     <script src="bower_components/openlayers3/build/ol.js"></script>
@@ -86,6 +89,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/solr.js"></script>
         <!-- endbuild -->
 </body>

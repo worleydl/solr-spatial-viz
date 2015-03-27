@@ -4,10 +4,45 @@ angular.module('frontendApp')
   .factory('$solr', ['$http', '$log', '$q', function($http, $log, $q) {
     var factory = {};
   
-    var SOLR_URL = "http://localhost:8983/solr/hmdb/select?rows=1000&wt=json&q=";
+    var SOLR_URL = "http://localhost:8983/solr/hmdb/select?rows=250&wt=json&q=";
      
+    /*
+      Create marker objects from Solr Data
 
-    function toGeoJson(data) {
+      Object with lan/lon and label properties
+    */
+    factory.toMarkers = function(data) {
+      var markers = [];
+
+      angular.forEach(data, function(value, key) {
+        var coordData = value.coords.split(',');
+        var message = value.name + "<br/><br/>" + value.description;
+
+        var marker = {
+          lat: parseFloat(coordData[0]),
+          lon: parseFloat(coordData[1]),
+          label: {
+            message: message,
+            show: false,
+            showOnMouseOver: false,
+            showOnMouseClick: true
+          }
+        };
+
+        markers.push(marker);
+      });
+
+      return markers;
+    };
+
+    /*
+      Create GeoJSON object from Solr Data
+
+      Returns an object that adheres to spec defined at
+      geojson.org.  This data can be used for various
+      purposes in OpenLayers.
+    */
+    factory.toGeoJson = function(data) {
       var geojson = {
         type: 'FeatureCollection',
         features: [] 
@@ -36,7 +71,7 @@ angular.module('frontendApp')
       });
 
       return geojson;
-    }
+    };
 
     factory.search = function(query) {
       $log.info('Searching for: ' + query);
@@ -45,7 +80,7 @@ angular.module('frontendApp')
       var request = SOLR_URL + query;
       $http.get(request)
         .success(function(data, status, headers, config) {
-          deferred.resolve(toGeoJson(data.response.docs));
+          deferred.resolve(data.response.docs);
         })
         .error(function(data, status, headers, config) {
           deferred.reject();
