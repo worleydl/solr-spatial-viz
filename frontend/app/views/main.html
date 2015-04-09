@@ -1,13 +1,15 @@
 <div class="container">
   <h3 class="text-center">Search for Something in US History</h3>
   <div class="row">
-    <div class="col-md-10">
-      <input style="width: 100%;" type="text" ng-model="query" >
-    </div>
+    <form ng-submit="doSearch()">
+      <div class="col-md-10">
+        <input style="width: 100%;" type="text" ng-model="query" >
+      </div>
 
-    <div class="col-md-2">
-      <button ng-click="doSearch()">Search!</button> 
-    </div>
+      <div class="col-md-2">
+        <input type="submit" value="Search!"> 
+      </div>
+    </form>
   </div>
 
   <hr style="margin: 10px;">
